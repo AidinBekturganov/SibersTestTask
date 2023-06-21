@@ -20,6 +20,6 @@ public class ApplicationDbContext : IdentityDbContext
     {
         base.OnModelCreating(builder);
         builder.Entity<ProjectEmployee>()
-            .HasKey(x => new { x.EmployeeId, x.ProjectId, x.ManagerId });
+            .HasKey(x => new { x.EmployeeId, x.ProjectId });
     }
 }

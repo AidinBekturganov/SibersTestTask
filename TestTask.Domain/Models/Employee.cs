@@ -7,4 +7,7 @@ public class Employee
     public string LastName { get; set; }
     public string MiddleName { get; set; }
     public string Email { get; set; }
+    public bool IsManager { get; set; }
+    
+    public ICollection<ProjectEmployee> ProjectEmployee { get; set; }
 }
