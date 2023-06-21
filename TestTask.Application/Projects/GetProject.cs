@@ -47,8 +47,8 @@ public class GetProject
             Name = x.Name,
             CustomerCompanyName = x.CustomerCompanyName,
             ExecutorCompanyName = x.ExecutorCompanyName,
-            StartDate = x.StartDate,
-            EndDate = x.EndDate,
+            StartDate = x.ProjectStartDate,
+            EndDate = x.ProjectEndDate,
             Priority = x.Priority,
             Employees = x.ProjectEmployee.Select(n => new Employee
             {

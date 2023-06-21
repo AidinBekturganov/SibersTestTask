@@ -37,8 +37,8 @@ public class CreateProject
             Name = request.Name,
             CustomerCompanyName = request.CustomerCompanyName,
             ExecutorCompanyName = request.ExecutorCompanyName,
-            StartDate = request.StartDate,
-            EndDate = request.EndDate,
+            ProjectStartDate = request.StartDate,
+            ProjectEndDate = request.EndDate,
             Priority = request.Priority,
 
             ProjectEmployee = request.Employees.Select(x => new ProjectEmployee()

@@ -12,15 +12,25 @@ public class GetProjects
         _projectManager = projectManager;
     }
 
-    public IEnumerable<ProjectViewModel> Do() =>
-        _projectManager.GetProjects(x => new ProjectViewModel
+    public IEnumerable<ProjectViewModel> Do(string? searchTerm, string? sortColumn,
+        string? sortOrder,
+        DateTime? startAtBeginDate,
+        DateTime? endAtBeginDate,
+        DateTime? startAtEndDate,
+        DateTime? endAtEndDate) =>
+        _projectManager.GetProjects(searchTerm, sortColumn, sortOrder,
+            startAtBeginDate,
+            endAtBeginDate,
+            startAtEndDate,
+            endAtEndDate,
+            x => new ProjectViewModel
         {
             Id = x.Id,
             Name = x.Name,
             CustomerCompanyName = x.CustomerCompanyName,
             ExecutorCompanyName = x.ExecutorCompanyName,
-            StartDate = x.StartDate,
-            EndDate = x.EndDate,
+            StartDate = x.ProjectStartDate,
+            EndDate = x.ProjectEndDate,
             Priority = x.Priority,
             EmployeeVieModel = x.ProjectEmployee.Select(n => new EmployeeVieModel
             {

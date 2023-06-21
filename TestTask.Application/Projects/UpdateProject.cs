@@ -19,21 +19,37 @@ public class UpdateProject
         project.Name = updateProjectRequest.Name;
         project.CustomerCompanyName = updateProjectRequest.CustomerCompanyName;
         project.ExecutorCompanyName = updateProjectRequest.ExecutorCompanyName;
-        project.StartDate = updateProjectRequest.StartDate;
-        project.EndDate = updateProjectRequest.EndDate;
+        project.ProjectStartDate = updateProjectRequest.StartDate;
+        project.ProjectEndDate = updateProjectRequest.EndDate;
         project.Priority = updateProjectRequest.Priority;
+        project.ProjectEmployee = updateProjectRequest.UpdateEmployeeRequest.Select(x => new ProjectEmployee
+        {
+            EmployeeId = x.Id,
+            ProjectId = updateProjectRequest.Id
+        }).ToList();
 
         await _projectManager.UpdateProject(project);
 
+        var updatedProject = _projectManager.GetProjectById(updateProjectRequest.Id, x => x);
+        
         return new UpdateProjectResponse
         {
-            Id = project.Id,
-            Name = project.Name,
-            CustomerCompanyName = project.CustomerCompanyName,
-            ExecutorCompanyName = project.ExecutorCompanyName,
-            EndDate = project.EndDate,
-            StartDate = project.StartDate,
-            Priority = project.Priority
+            Id = updatedProject.Id,
+            Name = updatedProject.Name,
+            CustomerCompanyName = updatedProject.CustomerCompanyName,
+            ExecutorCompanyName = updatedProject.ExecutorCompanyName,
+            EndDate = updatedProject.ProjectEndDate,
+            StartDate = updatedProject.ProjectStartDate,
+            Priority = updatedProject.Priority,
+            UpdateEmployeeResponse = updatedProject.ProjectEmployee.Select(n => new UpdateEmployeeResponse
+            {
+                Email = n.Employee.Email,
+                Id = n.Employee.Id,
+                FirstName = n.Employee.FirstName,
+                IsManager = n.Employee.IsManager,
+                LastName = n.Employee.LastName,
+                MiddleName = n.Employee.MiddleName
+            }).ToList()
         };
     }
 

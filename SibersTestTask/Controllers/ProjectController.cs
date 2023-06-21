@@ -18,8 +18,20 @@ public class ProjectController : Controller
         Ok(getProject.Do(id));
     
     [HttpGet("")]
-    public IActionResult GetProjects([FromServices] GetProjects getProjects) =>
-        Ok(getProjects.Do());
+    public IActionResult GetProjects(string? searchTerm,
+        string? sortColumn,
+        string? sortOrder,
+        DateTime? startAtBeginDate,
+        DateTime? endAtBeginDate,
+        DateTime? startAtEndDate,
+        DateTime? endAtEndDate,
+        [FromServices] GetProjects getProjects) =>
+        Ok(getProjects.Do(searchTerm, sortColumn,
+            sortOrder,
+            startAtBeginDate,
+            endAtBeginDate,
+            startAtEndDate,
+            endAtEndDate));
     
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProject(
